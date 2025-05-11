@@ -51,7 +51,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public final class TuningOpModes {
-    // TODO: change this to TankDrive.class if you're using tank
     public static final Class<?> DRIVE_CLASS = MecanumDrive.class;
 
     public static final String GROUP = "quickstart";
@@ -123,17 +122,7 @@ public final class TuningOpModes {
                 List<EncoderGroup> encoderGroups = new ArrayList<>();
                 List<EncoderRef> leftEncs = new ArrayList<>(), rightEncs = new ArrayList<>();
                 List<EncoderRef> parEncs = new ArrayList<>(), perpEncs = new ArrayList<>();
-                if (md.localizer instanceof MecanumDrive.DriveLocalizer) {
-                    MecanumDrive.DriveLocalizer dl = (MecanumDrive.DriveLocalizer) md.localizer;
-                    encoderGroups.add(new LynxQuadratureEncoderGroup(
-                            hardwareMap.getAll(LynxModule.class),
-                            Arrays.asList(dl.leftFront, dl.leftBack, dl.rightFront, dl.rightBack)
-                    ));
-                    leftEncs.add(new EncoderRef(0, 0));
-                    leftEncs.add(new EncoderRef(0, 1));
-                    rightEncs.add(new EncoderRef(0, 2));
-                    rightEncs.add(new EncoderRef(0, 3));
-                } else if (md.localizer instanceof ThreeDeadWheelLocalizer) {
+                if (md.localizer instanceof ThreeDeadWheelLocalizer) {
                     ThreeDeadWheelLocalizer dl = (ThreeDeadWheelLocalizer) md.localizer;
                     encoderGroups.add(new LynxQuadratureEncoderGroup(
                             hardwareMap.getAll(LynxModule.class),
