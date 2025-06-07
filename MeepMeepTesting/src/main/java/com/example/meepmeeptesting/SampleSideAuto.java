@@ -22,7 +22,17 @@ public class SampleSideAuto {
 //                        .lineToY(-48)
                           .strafeTo(new Vector2d(36,0))
                          .strafeTo(new Vector2d(42,0))
-                          .strafeTo(new Vector2d(42,-48))
+                          .strafeTo(new Vector2d(42,-48)) // first sample into obervation zone
+                           .strafeTo(new Vector2d(42,0))
+                           .strafeTo(new Vector2d(56,0))
+                           .strafeTo(new Vector2d(56,-48)) // Second sample into obervation zone
+                           .strafeTo(new Vector2d(56,0))
+                           .strafeTo(new Vector2d(60,0))
+                           .strafeTo(new Vector2d(60,-48)) // third sample into obervation zone
+
+                           .strafeToLinearHeading(new Vector2d(42,-30),Math.toRadians(270))
+                           .waitSeconds(2)
+                           .strafeTo(new Vector2d(42,-55)) // collects from human player
 //                        .splineTo(new Vector2d(48,-48),Math.toRadians(90))
                 .build());
 
