@@ -27,6 +27,7 @@ public class MovementTest {
                 .strafeTo(new Vector2d(24, 24))
                 .strafeTo(new Vector2d(-24, 24))
                 .strafeTo(new Vector2d(-24, 0))
+                .strafeTo(new Vector2d(0,0))
                 .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)

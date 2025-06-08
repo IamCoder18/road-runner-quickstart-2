@@ -8,7 +8,7 @@ import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
 public class SampleSideAuto {
     public static void main(String[] args) {
-        MeepMeep meepMeep = new MeepMeep(780);
+        MeepMeep meepMeep = new MeepMeep(600);
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
@@ -16,23 +16,24 @@ public class SampleSideAuto {
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(11.5, -61.5, Math.toRadians(90)))
-                        .strafeTo(new Vector2d(36,-61.5))
+//                        .strafeTo(new Vector2d(36,-61.5))
 
 //                .splineTo(new Vector2d(40,0),Math.toRadians(90))
 //                        .lineToY(-48)
-                          .strafeTo(new Vector2d(36,0))
-                         .strafeTo(new Vector2d(42,0))
-                          .strafeTo(new Vector2d(42,-48)) // first sample into obervation zone
+                           .splineTo(new Vector2d(36,-36),Math.toRadians(90))
+                           .splineTo(new Vector2d(36,0),Math.toRadians(90))
+                           .strafeTo(new Vector2d(42,0))
+                           .strafeTo(new Vector2d(42,-50)) // first sample into obervation zone
                            .strafeTo(new Vector2d(42,0))
                            .strafeTo(new Vector2d(56,0))
-                           .strafeTo(new Vector2d(56,-48)) // Second sample into obervation zone
+                           .strafeTo(new Vector2d(56,-50)) // Second sample into obervation zone
                            .strafeTo(new Vector2d(56,0))
-                           .strafeTo(new Vector2d(60,0))
-                           .strafeTo(new Vector2d(60,-48)) // third sample into obervation zone
+                           .strafeTo(new Vector2d(61,0))
+                           .strafeTo(new Vector2d(61,-50)) // third sample into obervation zone
 
                            .strafeToLinearHeading(new Vector2d(42,-30),Math.toRadians(270))
                            .waitSeconds(2)
-                           .strafeTo(new Vector2d(42,-55)) // collects from human player
+//                           .strafeTo(new Vector2d(42,-55)) // collects from human player
 //                        .splineTo(new Vector2d(48,-48),Math.toRadians(90))
                 .build());
 
