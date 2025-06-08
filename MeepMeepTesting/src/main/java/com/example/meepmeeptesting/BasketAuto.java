@@ -17,13 +17,15 @@ public class BasketAuto {
         Pose2d startPose = new Pose2d(-35.5, -61.5, Math.toRadians(90));
 
         myBot.runAction(myBot.getDrive().actionBuilder(startPose)
-                .splineTo(new Vector2d(-50,-40), Math.toRadians(90))
+                .splineTo(new Vector2d(-48,-38), Math.toRadians(90))
                 .waitSeconds(2)
-                .splineTo(new Vector2d(-50,-45), Math.toRadians(225))
+                .turnTo(180)
+                .splineTo(new Vector2d(-52,-52), Math.toRadians(225))
                 .waitSeconds(2)
-                .splineTo(new Vector2d(-55,-40), Math.toRadians(90))
+                .splineTo(new Vector2d(-57,-38), Math.toRadians(90))
                 .waitSeconds(2)
-                .splineTo(new Vector2d(-60,-40), Math.toRadians(90))
+                .turnTo(180)
+                .splineTo(new Vector2d(-52,-52), Math.toRadians(225))
                 .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
