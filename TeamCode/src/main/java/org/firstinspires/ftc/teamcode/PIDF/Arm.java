@@ -22,8 +22,10 @@ public class Arm extends SubsystemBase {
     Telemetry telemetry;
 
     public Arm(HardwareMap hw, Telemetry telemetry){
-         arm = new Motor(hw, "shoulder", Motor.GoBILDA.RPM_312);
-         reset();
+        this.telemetry = telemetry;
+        this.telemetry.addLine("Hello from Arm!");
+        arm = new Motor(hw, "shoulder", Motor.GoBILDA.RPM_312);
+        reset();
     }
 
     public void reset(){

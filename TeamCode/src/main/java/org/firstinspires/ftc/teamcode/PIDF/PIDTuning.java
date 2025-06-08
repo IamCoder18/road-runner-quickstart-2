@@ -16,6 +16,7 @@ public class PIDTuning extends OpMode {
     @Override
     public void init() {
         arm = new Arm(hardwareMap, telemetry);
+        telemetry.addLine("Hello from PIDTuning");
 //        lift = new Lift(hardwareMap);
     }
 
@@ -31,7 +32,7 @@ public class PIDTuning extends OpMode {
         else if (gamepad1.b) {
             CommandScheduler.getInstance().schedule(
                     new SequentialCommandGroup(
-                            arm.goTo(target).withTimeout(3000)
+                            arm.goTo(0).withTimeout(3000)
                     )
             );
         }
