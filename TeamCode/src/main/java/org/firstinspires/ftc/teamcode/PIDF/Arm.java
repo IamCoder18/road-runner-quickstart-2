@@ -16,14 +16,14 @@ public class Arm extends SubsystemBase {
     public static double i = 0;
     public static double d = 0;
     public static double f = 0;
+    private double speed;
+    private double currentPosition;
+    private double target;
 
     PIDFController pidfController = new PIDFController(p, i, d, f);
     Motor arm;
-    Telemetry telemetry;
 
-    public Arm(HardwareMap hw, Telemetry telemetry){
-        this.telemetry = telemetry;
-        this.telemetry.addLine("Hello from Arm!");
+    public Arm(HardwareMap hw){
         arm = new Motor(hw, "shoulder", Motor.GoBILDA.RPM_312);
         reset();
     }
@@ -36,22 +36,41 @@ public class Arm extends SubsystemBase {
         return new ArmPos(target);
     }
 
-    public class ArmPos extends CommandBase{
-        private final double target;
-        public double speed;
+    public ArmTelemetry telemetry(){
+        return new ArmTelemetry();
+    }
 
-        public ArmPos(double target){
-            this.target = target;
+    public class ArmTelemetry {
+        public double speed;
+        public double currentPosition;
+        public double target;
+
+        public ArmTelemetry(){
+            speed = Arm.this.speed;
+            currentPosition = Arm.this.currentPosition;
+            target = Arm.this.target;
+        }
+
+        public double getSpeed(){
+            return speed;
+        }
+        public double getCurrentPosition(){
+            return currentPosition;
+        }
+        public double getTarget() {
+            return target;
+        }
+    }
+
+    public class ArmPos extends CommandBase{
+        public ArmPos(double armTarget){
+            target = armTarget;
         }
 
         @Override
         public void execute(){
-            double shoulderPosition = arm.getCurrentPosition();
-            speed = pidfController.calculate(shoulderPosition, target);
-
-            telemetry.addData("Shoulder Speed", speed);
-            telemetry.addData("Shoulder Position", shoulderPosition);
-            telemetry.addData("Shoulder Target", target);
+            currentPosition = arm.getCurrentPosition();
+            speed = pidfController.calculate(currentPosition, target);
             arm.set(speed);
         }
 

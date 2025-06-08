@@ -15,7 +15,7 @@ public class PIDTuning extends OpMode {
 
     @Override
     public void init() {
-        arm = new Arm(hardwareMap, telemetry);
+        arm = new Arm(hardwareMap);
         telemetry.addLine("Hello from PIDTuning");
 //        lift = new Lift(hardwareMap);
     }
@@ -36,5 +36,11 @@ public class PIDTuning extends OpMode {
                     )
             );
         }
+
+        Arm.ArmTelemetry armTelemetry = arm.telemetry();
+        telemetry.addData("Arm Speed", armTelemetry.getSpeed());
+        telemetry.addData("Arm Current Position", armTelemetry.getCurrentPosition());
+        telemetry.addData("Arm Target", armTelemetry.getTarget());
+        telemetry.update();
     }
 }
