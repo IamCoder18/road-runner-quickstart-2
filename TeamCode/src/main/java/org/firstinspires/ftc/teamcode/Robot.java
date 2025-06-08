@@ -4,17 +4,14 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 //import org.firstinspires.ftc.teamcode.Subsystems.Compass;
-import org.firstinspires.ftc.teamcode.Drive;
+
 //import org.firstinspires.ftc.teamcode.Subsystems.GoBildaPinpointDriver;
 //import org.firstinspires.ftc.teamcode.Subsystems.Intake;
 //import org.firstinspires.ftc.teamcode.Subsystems.Lift;
 //import org.firstinspires.ftc.teamcode.Subsystems.Odometry;
 
-public class robot {
+public class Robot {
     // Public Subsystems
 //    public Intake intake;
 //    public Lift lift;
@@ -23,7 +20,7 @@ public class robot {
 //    public Odometry odometry;
     public Telemetry telemetry;
 
-    public robot(HardwareMap hardwareMap, Telemetry telemetry) {
+    public Robot(HardwareMap hardwareMap, Telemetry telemetry) {
         // Private Devices
         Servo claw = hardwareMap.get(Servo.class, "claw");
         Servo wrist = hardwareMap.get(Servo.class, "wrist");

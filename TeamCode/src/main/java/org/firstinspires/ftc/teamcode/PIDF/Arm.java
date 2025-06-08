@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.PIDF;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.Command;
 import com.arcrobotics.ftclib.command.CommandBase;
@@ -10,18 +8,21 @@ import com.arcrobotics.ftclib.controller.PIDFController;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 @Config
 public class Arm extends SubsystemBase {
-    double p = 0;
-    double i = 0;
-    double d = 0;
-    double f = 0;
+    public static double p = 0;
+    public static double i = 0;
+    public static double d = 0;
+    public static double f = 0;
 
     PIDFController pidfController = new PIDFController(p, i, d, f);
     Motor arm;
+    Telemetry telemetry;
 
-    public Arm(HardwareMap hw){
-         arm = new Motor(hw, "Shoulder", Motor.GoBILDA.RPM_312);
+    public Arm(HardwareMap hw, Telemetry telemetry){
+         arm = new Motor(hw, "shoulder", Motor.GoBILDA.RPM_312);
          reset();
     }
 
@@ -29,16 +30,16 @@ public class Arm extends SubsystemBase {
         arm.resetEncoder();
     }
 
-    public Command goTo(double Degrees){
-        return new ArmPos(Degrees);
+    public Command goTo(double target){
+        return new ArmPos(target);
     }
 
     public class ArmPos extends CommandBase{
         private final double target;
         public double speed;
 
-        public ArmPos(double degrees){
-            target = degrees;
+        public ArmPos(double target){
+            this.target = target;
         }
 
         @Override
