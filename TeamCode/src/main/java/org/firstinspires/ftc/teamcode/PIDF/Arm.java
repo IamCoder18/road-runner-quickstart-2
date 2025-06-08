@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.PIDF;
 
 import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
 
+import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.command.Command;
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.SubsystemBase;
@@ -9,12 +10,12 @@ import com.arcrobotics.ftclib.controller.PIDFController;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+@Config
 public class Arm extends SubsystemBase {
     double p = 0;
     double i = 0;
     double d = 0;
     double f = 0;
-    double velocity;
 
     PIDFController pidfController = new PIDFController(p, i, d, f);
     Motor arm;
@@ -42,9 +43,12 @@ public class Arm extends SubsystemBase {
 
         @Override
         public void execute(){
-            speed = pidfController.calculate(arm.getCurrentPosition(), target);
+            double shoulderPosition = arm.getCurrentPosition();
+            speed = pidfController.calculate(shoulderPosition, target);
 
             telemetry.addData("Shoulder Speed", speed);
+            telemetry.addData("Shoulder Position", shoulderPosition);
+            telemetry.addData("Shoulder Target", target);
             arm.set(speed);
         }
 

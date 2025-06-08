@@ -27,8 +27,7 @@ public class Lift extends SubsystemBase {
     Motor liftR;
 
 
-    public Lift(HardwareMap hw,ElevatorFeedforward feed ){
-        this.feedforward = feed;
+    public Lift(HardwareMap hw){
         liftL = new Motor(hw, "liftLeft", Motor.GoBILDA.RPM_312);
         liftR = new Motor(hw, "liftRight", Motor.GoBILDA.RPM_312);
 
