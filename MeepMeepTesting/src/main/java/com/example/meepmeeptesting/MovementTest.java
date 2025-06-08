@@ -1,6 +1,7 @@
 package com.example.meepmeeptesting;
 
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
@@ -16,23 +17,16 @@ public class MovementTest {
         Pose2d initialStartPose = new Pose2d(0, 0, Math.toRadians(0));
 
         myBot.runAction(myBot.getDrive().actionBuilder(initialStartPose)
-                .lineToX(30)
-                .lineToX(0)
-                .turn(Math.toRadians(90))
-                .lineToY(30)
-                .turn(Math.toRadians(-90))
-                .lineToY(0)
-                .lineToX(-30)
-                .lineToY(-30)
-                .turnTo(Math.toRadians(0))
-                .lineToX(30)
-                .turn(Math.toRadians(90))
-                .lineToY(30)
-                .turn(Math.toRadians(90))
-                .lineToX(-30)
-                .turn(Math.toRadians(90))
-                .lineToY(-30)
-                .turn(Math.toRadians(90))
+                .strafeTo(new Vector2d(24, 0))
+                .strafeTo(new Vector2d(0, 0))
+                .strafeTo(new Vector2d(0, 24))
+                .strafeTo(new Vector2d(0, 0))
+                .strafeTo(new Vector2d(-24, 0))
+                .strafeTo(new Vector2d(-24, -24))
+                .strafeTo(new Vector2d(24, -24))
+                .strafeTo(new Vector2d(24, 24))
+                .strafeTo(new Vector2d(-24, 24))
+                .strafeTo(new Vector2d(-24, 0))
                 .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_CENTERSTAGE_JUICE_DARK)
