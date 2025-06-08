@@ -23,7 +23,7 @@ public class testing extends OpMode {
         if(gamepad.a){
             CommandScheduler.getInstance().schedule(
                     new SequentialCommandGroup(
-                            arm.GoTo(90).withTimeout(3000)
+                            arm.goTo(90).withTimeout(3000)
                     )
             );
         }else if (!gamepad.a) {

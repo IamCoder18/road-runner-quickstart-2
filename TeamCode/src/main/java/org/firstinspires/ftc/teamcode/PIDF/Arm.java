@@ -6,61 +6,51 @@ import com.arcrobotics.ftclib.command.Command;
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.PIDFController;
-import com.arcrobotics.ftclib.controller.wpilibcontroller.ArmFeedforward;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 public class Arm extends SubsystemBase {
+    double p = 0;
+    double i = 0;
+    double d = 0;
+    double f = 0;
+    double velocity;
 
-    //PIDFController pidf;
-
-    double kS;
-    double Kcos;
-    double kA;
-    double kV;
-
-    double velo;
-
-    double target;
-
-    ArmFeedforward feedforward = new ArmFeedforward(kS,Kcos,kA,kV);
+    PIDFController pidfController = new PIDFController(p, i, d, f);
     Motor arm;
 
-    public Arm(HardwareMap hw,ArmFeedforward feed ){
-        this.feedforward = feed;
-         arm = new Motor(hw, "Sholder", Motor.GoBILDA.RPM_312);
-         Reset();
-
+    public Arm(HardwareMap hw){
+         arm = new Motor(hw, "Shoulder", Motor.GoBILDA.RPM_312);
+         reset();
     }
-    public void Reset(){
+
+    public void reset(){
         arm.resetEncoder();
     }
 
-//    public class goTo(double Angle) e{
-//        arm.set(feedforward.calculate(Math.toRadians(Angle),velo)); // TODO: find the velocity speed thats resonable
-//
-//    }
-
-    public Command GoTo(double Degrees){
+    public Command goTo(double Degrees){
         return new ArmPos(Degrees);
     }
 
     public class ArmPos extends CommandBase{
+        private final double target;
+        public double speed;
 
-        public ArmPos(double Degrees){
-            target = Degrees;
-
-
+        public ArmPos(double degrees){
+            target = degrees;
         }
+
         @Override
         public void execute(){
-            telemetry.addData("sholder Position",feedforward.calculate(Math.toRadians(target),velo));
-            arm.set(feedforward.calculate(Math.toRadians(target),velo));;
-        }
-        @Override
-        public boolean isFinished(){
-            return feedforward.calculate(Math.toRadians(target),velo) <= 0;
+            speed = pidfController.calculate(arm.getCurrentPosition(), target);
+
+            telemetry.addData("Shoulder Speed", speed);
+            arm.set(speed);
         }
 
+        @Override
+        public boolean isFinished(){
+            return speed <= 0.001;
+        }
     }
 }
