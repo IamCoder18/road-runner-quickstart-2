@@ -41,6 +41,10 @@ public class PIDTuning extends OpMode {
         telemetry.addData("Arm Speed", armTelemetry.getSpeed());
         telemetry.addData("Arm Current Position", armTelemetry.getCurrentPosition());
         telemetry.addData("Arm Target", armTelemetry.getTarget());
+        telemetry.addData("Arm P", armTelemetry.getP());
+        telemetry.addData("Arm I", armTelemetry.getI());
+        telemetry.addData("Arm D", armTelemetry.getD());
+        telemetry.addData("Arm F", armTelemetry.getF());
         telemetry.update();
     }
 }

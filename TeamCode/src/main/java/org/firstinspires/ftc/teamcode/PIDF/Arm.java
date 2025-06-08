@@ -5,10 +5,8 @@ import com.arcrobotics.ftclib.command.Command;
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.PIDFController;
-import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Config
 public class Arm extends SubsystemBase {
@@ -21,15 +19,19 @@ public class Arm extends SubsystemBase {
     private double target;
 
     PIDFController pidfController = new PIDFController(p, i, d, f);
-    Motor arm;
+    DcMotor arm;
 
-    public Arm(HardwareMap hw){
-        arm = new Motor(hw, "shoulder", Motor.GoBILDA.RPM_312);
+    public Arm(HardwareMap hardwareMap){
+        this.arm = hardwareMap.get(DcMotor.class, "shoulder");
+        arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        arm.setDirection(DcMotor.Direction.REVERSE);
+        pidfController.setTolerance(10);
         reset();
     }
 
     public void reset(){
-        arm.resetEncoder();
+        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public Command goTo(double target){
@@ -41,24 +43,50 @@ public class Arm extends SubsystemBase {
     }
 
     public class ArmTelemetry {
-        public double speed;
-        public double currentPosition;
-        public double target;
+        private final double speed;
+        private final double currentPosition;
+        private final double target;
+        private final double p;
+        private final double i;
+        private final double d;
+        private final double f;
 
         public ArmTelemetry(){
             speed = Arm.this.speed;
             currentPosition = Arm.this.currentPosition;
             target = Arm.this.target;
+            p = Arm.this.pidfController.getP();
+            i = Arm.this.pidfController.getI();
+            d = Arm.this.pidfController.getD();
+            f = Arm.this.pidfController.getF();
         }
 
         public double getSpeed(){
             return speed;
         }
+
         public double getCurrentPosition(){
             return currentPosition;
         }
+
         public double getTarget() {
             return target;
+        }
+
+        public double getP() {
+            return p;
+        }
+
+        public double getI() {
+            return i;
+        }
+
+        public double getD() {
+            return d;
+        }
+
+        public double getF() {
+            return f;
         }
     }
 
@@ -71,12 +99,13 @@ public class Arm extends SubsystemBase {
         public void execute(){
             currentPosition = arm.getCurrentPosition();
             speed = pidfController.calculate(currentPosition, target);
-            arm.set(speed);
+            arm.setPower(speed);
         }
 
         @Override
         public boolean isFinished(){
-            return speed <= 0.001;
+//            return pidfController.atSetPoint();
+            return false;
         }
     }
 }
