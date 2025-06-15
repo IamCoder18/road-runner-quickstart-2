@@ -8,7 +8,7 @@ public class Claw {
 	private final double target;
 
 	public Claw(HardwareMap hw, double target) {
-		this.claw = claw;
+		this.claw = hw.get(Servo.class, "claw");
 		this.target = target;
 	}
 }
