@@ -13,7 +13,7 @@ public class Claw implements Action {
 
 	public Claw(HardwareMap hw, double target) {
 		this.claw = hw.get(Servo.class, "claw");
-		this.claw.scaleRange(-1, 1);
+		this.claw.scaleRange(0, 1);
 
 		this.target = target;
 	}

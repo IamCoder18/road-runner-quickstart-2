@@ -12,9 +12,6 @@ import org.firstinspires.ftc.teamcode.Actions.Lift;
 
 @Autonomous
 public class RoadrunnerLiftTest extends OpMode {
-	Lift lift;
-	// TODO: Get real PIDF coefficients
-	PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.025, 0, 0, 0.0006);
 	MultipleTelemetry multipleTelemetry;
 
 	@Override
@@ -23,12 +20,17 @@ public class RoadrunnerLiftTest extends OpMode {
 
 		telemetry.addData("Status", "Initialized");
 		telemetry.update();
+	}
 
-		lift = new Lift(10, pidfCoefficients, hardwareMap);
+	@Override
+	public void start(){
+		Actions.runBlocking(
+				new Lift(hardwareMap, 10)
+		);
 	}
 
 	@Override
 	public void loop() {
-		Actions.runBlocking(lift);
+
 	}
 }
