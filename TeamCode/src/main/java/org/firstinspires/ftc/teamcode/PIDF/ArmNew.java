@@ -23,7 +23,8 @@ public class ArmNew {
     MultipleTelemetry Telemetry;
     private PIDController controller;
 
-    public static double p = 0, i = 0, d = 0, f = 0;
+    // These are the vaules that worked on jun 14
+    public static double p = 0.037, i = 0, d = 0.001, f = 0.001;
     public static  int target;
     private static double ticks_per_degree = 700/180;
 
