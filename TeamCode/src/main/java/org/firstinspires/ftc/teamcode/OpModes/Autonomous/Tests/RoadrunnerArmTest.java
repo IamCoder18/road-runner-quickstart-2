@@ -22,7 +22,7 @@ public class RoadrunnerArmTest extends OpMode {
 		telemetry.addData("Status", "Initialized");
 		telemetry.update();
 
-		arm = new Arm(40, pidfCoefficients, hardwareMap);
+		arm = new Arm(300, pidfCoefficients, hardwareMap);
 	}
 
 	@Override
