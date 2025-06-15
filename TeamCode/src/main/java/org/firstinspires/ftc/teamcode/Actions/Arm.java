@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 public class Arm implements Action {
 	private final double target;
 	private final PIDController controller;
-	private final DcMotor shoulder;
+	public final DcMotor shoulder;
 	private final static double ticksPerDegree = (double) 1;
 	private final double f;
 
