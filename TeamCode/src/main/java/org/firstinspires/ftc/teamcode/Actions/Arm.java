@@ -15,7 +15,7 @@ public class Arm implements Action {
 	private final double target;
 	private final PIDController controller;
 	private final DcMotor shoulder;
-	private final static double ticksPerDegree = (double) 80;
+	private final static double ticksPerDegree = (double) 1;
 	private final double f;
 
 	public Arm(double target, PIDFCoefficients pidfCoefficients, HardwareMap hw) {
