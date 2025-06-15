@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.OpModes;
+package org.firstinspires.ftc.teamcode.OpModes.Autonomous;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -9,10 +9,10 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 @Autonomous
-public class BasketAuto  extends OpMode {
-
+public class BasketAuto extends OpMode {
     Pose2d beginPose;
     MecanumDrive drive;
+
     @Override
     public void init() {
         beginPose = new Pose2d(-35.5, -61.5, Math.toRadians(90));
@@ -36,7 +36,9 @@ public class BasketAuto  extends OpMode {
     }
 
     @Override
-    public void loop() {}
-
+    public void loop() {
+        telemetry.addData("Status", "Running");
+        telemetry.update();
     }
+}
 
