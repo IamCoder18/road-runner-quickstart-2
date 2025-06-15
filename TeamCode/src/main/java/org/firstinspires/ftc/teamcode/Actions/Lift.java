@@ -8,6 +8,7 @@ import com.acmerobotics.roadrunner.Action;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.arcrobotics.ftclib.controller.PIDFController;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
@@ -23,6 +24,7 @@ public class Lift implements Action {
 		this.controller.setTolerance(0.5 * TICKS_PER_INCH); // 0.5 inches
 
 		liftMotor = hardwareMap.get(DcMotor.class, "liftMotor");
+		liftMotor.setDirection(DcMotor.Direction.FORWARD);
 		liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 		liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 	}

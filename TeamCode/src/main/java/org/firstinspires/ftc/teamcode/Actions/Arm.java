@@ -34,15 +34,16 @@ public class Arm implements Action {
 	public boolean run(@NonNull TelemetryPacket packet) {
 		double currentPosition = shoulder.getCurrentPosition();
 		double power = controller.calculate(currentPosition, targetPositionTicks);
+		// TODO: See if we can replace with PIDF controller
 		double feedforward = Math.cos(targetPositionTicks / TICKS_PER_DEGREE) * feedforwardGain;
+
 		shoulder.setPower(power + feedforward);
 
-		packet.put("Target", targetPositionTicks);
-		packet.put("Current Position", currentPosition);
-		packet.put("Motor Power", power + feedforward);
+		packet.put("Arm Target Ticks", targetPositionTicks);
+		packet.put("Arm Current Ticks", currentPosition);
+		packet.put("Arm Motor Power", power + feedforward);
 		FtcDashboard.getInstance().sendTelemetryPacket(packet);
 
-		// Return false to end action, true to continue
 		return !controller.atSetPoint();
 	}
 }
