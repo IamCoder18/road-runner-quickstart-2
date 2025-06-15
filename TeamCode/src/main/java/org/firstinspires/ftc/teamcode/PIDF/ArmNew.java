@@ -29,7 +29,6 @@ public class ArmNew {
 
     public ArmNew(HardwareMap hw, MultipleTelemetry telemetry){
         shoulder = hw.get(DcMotor.class,"shoulder");
-//        Telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         this.Telemetry = telemetry;
         shoulder.setDirection(DcMotorSimple.Direction.REVERSE);
         controller = new PIDController(p,i,d);
@@ -46,16 +45,9 @@ public class ArmNew {
 
         shoulder.setPower(power);
 
-
-//         So for some reason telementy is null Im not sure why
-        // TODO: ?????????????????????????
-
-//        Telemetry.addData("target",target);
-//        Telemetry.addData("Arm Pos:", armpos);
-//        Telemetry.addData("Arm Power:", power);
-//        Telemetry.update();
-
+        Telemetry.addData("target",target);
+        Telemetry.addData("Arm Pos:", armpos);
+        Telemetry.addData("Arm Power:", power);
+        Telemetry.update();
     }
-
-
 }
