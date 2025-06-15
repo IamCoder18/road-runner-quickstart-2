@@ -22,7 +22,7 @@ public class Arm implements Action {
 	private final double f;
 
 	public Arm(double target, PIDFCoefficients pidfCoefficients, HardwareMap hw) {
-		this.target = target;
+		this.target = target * ticksPerDegree;
 		controller = new PIDController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d);
 		controller.setTolerance(1.8 * ticksPerDegree);
 		f = pidfCoefficients.f;
