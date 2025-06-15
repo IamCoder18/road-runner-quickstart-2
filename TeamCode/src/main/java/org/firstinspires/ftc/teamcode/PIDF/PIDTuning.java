@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.PIDF;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
@@ -18,11 +19,11 @@ public class PIDTuning extends OpMode {
     public static int target = 0;
 //    Lift lift;
 
-    MultipleTelemetry telemetry;
+    MultipleTelemetry multipleTelemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
     @Override
     public void init() {
-        arm = new ArmNew(hardwareMap,telemetry);
+        arm = new ArmNew(hardwareMap,multipleTelemetry);
         //telemetry.addLine("Hello from PIDTuning");
 //        lift = new Lift(hardwareMap);
     }
