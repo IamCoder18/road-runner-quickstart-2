@@ -18,11 +18,13 @@ public class Arm implements Action {
 	private final static double ticksPerDegree = (double) 1;
 	private final double f;
 
-	public Arm(double target, PIDFCoefficients pidfCoefficients, HardwareMap hw) {
+	public Arm(HardwareMap hw, double target) {
 		this.target = target * ticksPerDegree;
+		PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.037, 0, 0, 0.001);
 		controller = new PIDController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d);
 		controller.setTolerance(1.8 * ticksPerDegree);
 		f = pidfCoefficients.f;
+
 		shoulder = hw.get(DcMotor.class,"shoulder");
 		shoulder.setDirection(DcMotorSimple.Direction.REVERSE);
 		shoulder.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

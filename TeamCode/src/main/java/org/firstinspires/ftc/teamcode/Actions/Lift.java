@@ -18,8 +18,9 @@ public class Lift implements Action {
 	private final MotorGroup liftMotor;
 	private final static double TICKS_PER_INCH = 100;
 
-	public Lift(double targetPosition, PIDFCoefficients pidfCoefficients, HardwareMap hardwareMap) {
+	public Lift(HardwareMap hardwareMap, double targetPosition) {
 		this.targetPositionTicks = targetPosition * TICKS_PER_INCH;
+		PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.025, 0, 0, 0.0006);
 		this.controller = new PIDFController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d, pidfCoefficients.f);
 		this.controller.setTolerance(0.5 * TICKS_PER_INCH); // 0.5 inches
 
