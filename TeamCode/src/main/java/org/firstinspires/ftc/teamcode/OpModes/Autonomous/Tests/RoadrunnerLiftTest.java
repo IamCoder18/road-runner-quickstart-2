@@ -14,7 +14,7 @@ import org.firstinspires.ftc.teamcode.Actions.Lift;
 public class RoadrunnerLiftTest extends OpMode {
 	Lift lift;
 	// TODO: Get real PIDF coefficients
-	PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.037, 0, 0.001, 0.001);
+	PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.025, 0, 0, 0.0006);
 	MultipleTelemetry multipleTelemetry;
 
 	@Override
