@@ -39,7 +39,6 @@ public class Arm implements Action {
 		packet.put("Motor Power", power + feedforward);
 		FtcDashboard.getInstance().sendTelemetryPacket(packet);
 
-		// Return false to end action, true to continue
-		return controller.atSetPoint();
+		return !controller.atSetPoint();
 	}
 }
