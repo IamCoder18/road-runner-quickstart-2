@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.OpModes;
+package org.firstinspires.ftc.teamcode.OpModes.Autonomous;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -40,6 +40,5 @@ public class BasketAuto extends OpMode {
         telemetry.addData("Status", "Running");
         telemetry.update();
     }
-
 }
 

@@ -15,7 +15,5 @@ public class Test extends OpMode {
 	}
 
 	@Override
-	public void loop() {
-
-	}
+	public void loop() {}
 }
