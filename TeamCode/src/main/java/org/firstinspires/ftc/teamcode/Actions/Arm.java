@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.Actions;
 import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.FtcDashboard;
-import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 import com.arcrobotics.ftclib.controller.PIDController;
@@ -12,13 +11,11 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 public class Arm implements Action {
 	private final double target;
 	private final PIDController controller;
 	private final DcMotor shoulder;
-	private final static double ticksPerDegree = (double) 700 /180;
+	private final static double ticksPerDegree = (double) 700 / 180;
 	private final double f;
 
 	public Arm(double target, PIDFCoefficients pidfCoefficients, HardwareMap hw) {

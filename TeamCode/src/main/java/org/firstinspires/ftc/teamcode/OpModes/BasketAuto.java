@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 @Autonomous
-public class BasketAuto  extends OpMode {
+public class BasketAuto extends OpMode {
     Pose2d beginPose;
     MecanumDrive drive;
 
@@ -36,7 +36,10 @@ public class BasketAuto  extends OpMode {
     }
 
     @Override
-    public void loop() {}
-
+    public void loop() {
+        telemetry.addData("Status", "Running");
+        telemetry.update();
     }
+
+}
 
