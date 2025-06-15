@@ -16,7 +16,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class PIDTuning extends OpMode {
 //    Arm arm;
     ArmNew arm;
-    public static int target = 0;
+
+    LiftNew lift;
+    public static int armTarget = 0;
+    public static int liftTarget = 0;
 //    Lift lift;
 
     MultipleTelemetry multipleTelemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
@@ -24,6 +27,7 @@ public class PIDTuning extends OpMode {
     @Override
     public void init() {
         arm = new ArmNew(hardwareMap,multipleTelemetry);
+        lift = new LiftNew(hardwareMap,multipleTelemetry);
         //telemetry.addLine("Hello from PIDTuning");
 //        lift = new Lift(hardwareMap);
     }
@@ -37,7 +41,8 @@ public class PIDTuning extends OpMode {
 //                    )
 //            );
 
-            arm.Goto(target);
+            arm.Goto(armTarget);
+            lift.Goto(liftTarget);
 //        }
 //        else if (gamepad1.b) {
 ////            CommandScheduler.getInstance().schedule(
