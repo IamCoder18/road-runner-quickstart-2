@@ -31,7 +31,10 @@ public class RoadrunnerArmTest extends OpMode {
 						new SleepAction(3),
 						new Arm(300, pidfCoefficients, hardwareMap),
 						new SleepAction(3),
-						new Arm(1000, pidfCoefficients, hardwareMap)
+						new Arm(1000, pidfCoefficients, hardwareMap),
+						new SleepAction(3),
+						new Arm(300,pidfCoefficients,hardwareMap),
+						new SleepAction(2)
 				)
 		);
 	}
