@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.OpModes;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.PIDCoefficients;
@@ -22,11 +23,11 @@ public class RoadrunnerArmTest extends OpMode {
 		telemetry.addData("Status", "Initialized");
 		telemetry.update();
 
-		arm = new Arm(40, pidfCoefficients, hardwareMap, telemetry);
+		arm = new Arm(40, pidfCoefficients, hardwareMap);
 	}
 
 	@Override
 	public void loop() {
-
+		Actions.runBlocking(arm);
 	}
 }

@@ -20,24 +20,12 @@ public class Arm implements Action {
 	private final DcMotor shoulder;
 	private final static double ticksPerDegree = (double) 700 /180;
 	private final double f;
-	private final MultipleTelemetry multipleTelemetry;
 
-	public Arm(double target, PIDFCoefficients pidfCoefficients, HardwareMap hw, Telemetry telemetry) {
+	public Arm(double target, PIDFCoefficients pidfCoefficients, HardwareMap hw) {
 		this.target = target;
 		controller = new PIDController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d);
 		controller.setTolerance(1.8 * ticksPerDegree);
 		f = pidfCoefficients.f;
-		multipleTelemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
-		shoulder = hw.get(DcMotor.class,"shoulder");
-		shoulder.setDirection(DcMotorSimple.Direction.REVERSE);
-	}
-
-	public Arm(double target, PIDFCoefficients pidfCoefficients, HardwareMap hw, MultipleTelemetry telemetry) {
-		this.target = target;
-		controller = new PIDController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d);
-		controller.setTolerance(1.8 * ticksPerDegree);
-		f = pidfCoefficients.f;
-		multipleTelemetry = telemetry;
 		shoulder = hw.get(DcMotor.class,"shoulder");
 		shoulder.setDirection(DcMotorSimple.Direction.REVERSE);
 	}
@@ -49,10 +37,10 @@ public class Arm implements Action {
 		double feedforward = Math.cos(target/ticksPerDegree) * f;
 		shoulder.setPower(power + feedforward);
 
-		multipleTelemetry.addData("Target", target);
-		multipleTelemetry.addData("Current Position", currentPosition);
-		multipleTelemetry.addData("Motor Power", power + feedforward);
-		multipleTelemetry.update();
+		packet.put("Target", target);
+		packet.put("Current Position", currentPosition);
+		packet.put("Motor Power", power + feedforward);
+		FtcDashboard.getInstance().sendTelemetryPacket(packet);
 
 		// Return false to end action, true to continue
 		return controller.atSetPoint();
