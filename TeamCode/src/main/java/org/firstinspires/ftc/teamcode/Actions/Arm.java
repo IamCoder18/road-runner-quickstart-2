@@ -32,6 +32,16 @@ public class Arm implements Action {
 		shoulder.setDirection(DcMotorSimple.Direction.REVERSE);
 	}
 
+	public Arm(double target, PIDFCoefficients pidfCoefficients, HardwareMap hw, MultipleTelemetry telemetry) {
+		this.target = target;
+		controller = new PIDController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d);
+		controller.setTolerance(1.8 * ticksPerDegree);
+		f = pidfCoefficients.f;
+		multipleTelemetry = telemetry;
+		shoulder = hw.get(DcMotor.class,"shoulder");
+		shoulder.setDirection(DcMotorSimple.Direction.REVERSE);
+	}
+
 	@Override
 	public boolean run(@NonNull TelemetryPacket packet) {
 		double currentPosition = shoulder.getCurrentPosition();
