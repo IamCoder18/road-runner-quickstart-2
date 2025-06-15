@@ -28,11 +28,10 @@ public class RoadrunnerArmTest extends OpMode {
 	public void loop() {
 		Actions.runBlocking(
 				new SequentialAction(
-						new Arm(0, pidfCoefficients, hardwareMap),
 						new SleepAction(3),
-						new Arm(45, pidfCoefficients, hardwareMap),
+						new Arm(15, pidfCoefficients, hardwareMap),
 						new SleepAction(3),
-						new Arm(90, pidfCoefficients, hardwareMap)
+						new Arm(30, pidfCoefficients, hardwareMap)
 				)
 		);
 	}
