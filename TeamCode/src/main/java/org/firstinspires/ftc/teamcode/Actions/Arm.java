@@ -12,34 +12,37 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 public class Arm implements Action {
-	private final double target;
+	private final double targetPositionTicks;
 	private final PIDController controller;
 	private final DcMotor shoulder;
-	private final static double ticksPerDegree = (double) 700 / 180;
-	private final double f;
+	private final static double TICKS_PER_DEGREE = (double) 700 / 180;
+	private final double feedforwardGain;
 
-	public Arm(double target, PIDFCoefficients pidfCoefficients, HardwareMap hw) {
-		this.target = target * ticksPerDegree;
+	public Arm(double targetPosition, PIDFCoefficients pidfCoefficients, HardwareMap hw) {
+		this.targetPositionTicks = targetPosition * TICKS_PER_DEGREE;
 		controller = new PIDController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d);
-		controller.setTolerance(1.8 * ticksPerDegree);
-		f = pidfCoefficients.f;
+		controller.setTolerance(1.8 * TICKS_PER_DEGREE); // 1.8 degrees
+		feedforwardGain = pidfCoefficients.f;
+
 		shoulder = hw.get(DcMotor.class,"shoulder");
 		shoulder.setDirection(DcMotorSimple.Direction.REVERSE);
+		shoulder.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+		shoulder.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 	}
 
 	@Override
 	public boolean run(@NonNull TelemetryPacket packet) {
 		double currentPosition = shoulder.getCurrentPosition();
-		double power = controller.calculate(currentPosition, target);
-		double feedforward = Math.cos(target/ticksPerDegree) * f;
+		double power = controller.calculate(currentPosition, targetPositionTicks);
+		double feedforward = Math.cos(targetPositionTicks / TICKS_PER_DEGREE) * feedforwardGain;
 		shoulder.setPower(power + feedforward);
 
-		packet.put("Target", target);
+		packet.put("Target", targetPositionTicks);
 		packet.put("Current Position", currentPosition);
 		packet.put("Motor Power", power + feedforward);
 		FtcDashboard.getInstance().sendTelemetryPacket(packet);
 
 		// Return false to end action, true to continue
-		return controller.atSetPoint();
+		return !controller.atSetPoint();
 	}
 }
