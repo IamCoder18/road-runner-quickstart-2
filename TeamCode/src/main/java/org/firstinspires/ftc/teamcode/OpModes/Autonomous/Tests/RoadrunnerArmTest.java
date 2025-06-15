@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.Actions.Arm;
 @Autonomous
 public class RoadrunnerArmTest extends OpMode {
 	Arm arm;
-	PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.037, 0, 0.001, 0.001);
+	PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.037, 0, 0, 0.001);
 	MultipleTelemetry multipleTelemetry;
 
 	@Override
