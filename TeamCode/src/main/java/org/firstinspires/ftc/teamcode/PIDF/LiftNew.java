@@ -20,7 +20,7 @@ public class LiftNew {
     MultipleTelemetry Telemetry;
     private PIDController controller;
 
-    // These are the vaules that worked on jun 14
+    // These are the vaules that worked on jun 14 fort the lift
     public static double p = 0.025, i = 0, d = 0, f = 0.0006;
     public static  int target;
     private static double ticks_per_degree = 700/180;
