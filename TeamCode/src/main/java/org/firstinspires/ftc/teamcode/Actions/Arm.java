@@ -25,6 +25,7 @@ public class Arm implements Action {
 		f = pidfCoefficients.f;
 		shoulder = hw.get(DcMotor.class,"shoulder");
 		shoulder.setDirection(DcMotorSimple.Direction.REVERSE);
+		shoulder.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 	}
 
 	@Override
