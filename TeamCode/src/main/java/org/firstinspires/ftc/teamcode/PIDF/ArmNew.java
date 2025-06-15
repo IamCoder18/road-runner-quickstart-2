@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode.PIDF;
 
+import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.controller.PIDController;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -17,21 +20,23 @@ public class ArmNew {
 
     DcMotor shoulder;
 
-    Telemetry Telemetry;
+    MultipleTelemetry Telemetry;
     private PIDController controller;
 
     public static double p = 0, i = 0, d = 0, f = 0;
     public static  int target;
     private static double ticks_per_degree = 700/180;
 
-    public ArmNew(HardwareMap hw, Telemetry telemetry){
+    public ArmNew(HardwareMap hw, MultipleTelemetry telemetry){
         shoulder = hw.get(DcMotor.class,"shoulder");
+//        Telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
         this.Telemetry = telemetry;
         shoulder.setDirection(DcMotorSimple.Direction.REVERSE);
         controller = new PIDController(p,i,d);
     }
 
-    public void Goto(double pos){
+    public void Goto(int pos){
+        target = pos;
         controller.setPID(p,i,d);
         int armpos = shoulder.getCurrentPosition();
         double pid = controller.calculate(armpos,target);
@@ -41,9 +46,14 @@ public class ArmNew {
 
         shoulder.setPower(power);
 
-        Telemetry.addData("target",target);
-        Telemetry.addData("Arm Pos:", armpos);
-        Telemetry.addData("Arm Power:", power);
+
+//         So for some reason telementy is null Im not sure why
+        // TODO: ?????????????????????????
+
+//        Telemetry.addData("target",target);
+//        Telemetry.addData("Arm Pos:", armpos);
+//        Telemetry.addData("Arm Power:", power);
+//        Telemetry.update();
 
     }
 

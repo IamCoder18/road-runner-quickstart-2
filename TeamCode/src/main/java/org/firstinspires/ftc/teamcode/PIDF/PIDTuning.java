@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode.PIDF;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.command.CommandScheduler;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -13,21 +15,21 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class PIDTuning extends OpMode {
 //    Arm arm;
     ArmNew arm;
-    public static double target = 2000;
+    public static int target = 0;
 //    Lift lift;
 
-    Telemetry telemetry;
+    MultipleTelemetry telemetry;
 
     @Override
     public void init() {
         arm = new ArmNew(hardwareMap,telemetry);
-        telemetry.addLine("Hello from PIDTuning");
+        //telemetry.addLine("Hello from PIDTuning");
 //        lift = new Lift(hardwareMap);
     }
 
     @Override
     public void loop() {
-        if (gamepad1.a) {
+//        if (gamepad1.a) {
 //            CommandScheduler.getInstance().schedule(
 //                    new SequentialCommandGroup(
 //                            arm.goTo(target).withTimeout(3000)
@@ -35,15 +37,15 @@ public class PIDTuning extends OpMode {
 //            );
 
             arm.Goto(target);
-        }
-        else if (gamepad1.b) {
-//            CommandScheduler.getInstance().schedule(
-//                    new SequentialCommandGroup(
-//                            arm.goTo(0).withTimeout(3000)
-//                    )
-//            );
-            arm.Goto(0);
-        }
+//        }
+//        else if (gamepad1.b) {
+////            CommandScheduler.getInstance().schedule(
+////                    new SequentialCommandGroup(
+////                            arm.goTo(0).withTimeout(3000)
+////                    )
+////            );
+//            arm.Goto(0);
+//        }
 
 //        Arm.ArmTelemetry armTelemetry = arm.telemetry();
 //        telemetry.addData("Arm Speed", armTelemetry.getSpeed());
