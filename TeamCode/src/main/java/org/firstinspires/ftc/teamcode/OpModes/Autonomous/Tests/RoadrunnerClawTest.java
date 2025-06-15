@@ -30,7 +30,11 @@ public class RoadrunnerClawTest extends OpMode {
 				new SequentialAction(
 					new Claw(hardwareMap, 1),
 					new SleepAction(3),
-					new Wrist(hardwareMap, 1)
+					new Wrist(hardwareMap, 1),
+					new SleepAction(3),
+					new Claw(hardwareMap, 0),
+					new SleepAction(3),
+					new Wrist(hardwareMap, 0)
 				)
 		);
 	}
