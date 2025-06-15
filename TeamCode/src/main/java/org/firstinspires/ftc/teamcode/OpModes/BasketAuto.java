@@ -10,9 +10,9 @@ import org.firstinspires.ftc.teamcode.MecanumDrive;
 
 @Autonomous
 public class BasketAuto  extends OpMode {
-
     Pose2d beginPose;
     MecanumDrive drive;
+
     @Override
     public void init() {
         beginPose = new Pose2d(-35.5, -61.5, Math.toRadians(90));
