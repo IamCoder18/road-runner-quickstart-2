@@ -16,12 +16,13 @@ public class SampleSideAuto {
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(11.5, -61.5, Math.toRadians(90)))
-//                        .strafeTo(new Vector2d(36,-61.5))
+                .strafeTo(new Vector2d(7,-37))
+                .strafeTo(new Vector2d(11.5,-40))
 
 //                .splineTo(new Vector2d(40,0),Math.toRadians(90))
 //                        .lineToY(-48)
-                           .splineTo(new Vector2d(36,-36),Math.toRadians(90))
-                           .splineTo(new Vector2d(36,0),Math.toRadians(90))
+                           .splineToConstantHeading(new Vector2d(36,-36),Math.toRadians(90))
+                           .splineToConstantHeading(new Vector2d(36,0),Math.toRadians(90))
                            .strafeTo(new Vector2d(42,0))
                            .strafeTo(new Vector2d(42,-50)) // first sample into obervation zone
                            .strafeTo(new Vector2d(42,0))
