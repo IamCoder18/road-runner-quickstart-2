@@ -68,18 +68,18 @@ public class RoadrunnerArmTest extends OpMode {
 		if(id == 1)
 		{
 			currentAction =  new SequentialAction(
-					new Arm(hardwareMap, 800),
+					new Arm(hardwareMap, 45),
 //					new Arm(hardwareMap, 500),
-					new Arm(hardwareMap, 300)
+					new Arm(hardwareMap, 15)
 			);
 		}
 		else if(id == 2)
 		{
 			currentAction =  new SequentialAction(
-					new Arm(hardwareMap, 300),
-					new Arm(hardwareMap, 500),
+					new Arm(hardwareMap, 15),
+					new Arm(hardwareMap, 30),
 					new SleepAction(3),
-					new Arm(hardwareMap, 800)
+					new Arm(hardwareMap, 45)
 			);
 		}
 	}
