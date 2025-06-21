@@ -129,7 +129,8 @@ public class Action {
 		telemetry.update();
 	}
 
-	public class Claw implements com.acmerobotics.roadrunner.Action {@Override
+	public class Claw implements com.acmerobotics.roadrunner.Action {
+		@Override
 		public boolean run(@NonNull TelemetryPacket packet) {
 			claw.setPosition(clawTarget);
 			packet.put("Claw Target", clawTarget);
