@@ -35,7 +35,7 @@ public class Action {
 		Motor liftMotorLeft = new Motor(hardwareMap, "liftMotorLeft", Motor.GoBILDA.RPM_117);
 		Motor liftMotorRight = new Motor(hardwareMap, "liftMotorRight", Motor.GoBILDA.RPM_117);
 		liftMotor = new MotorGroup(liftMotorLeft, liftMotorRight);
-		shoulder = new Motor(hardwareMap, "shoulder", 2759.12, 60.89);
+		shoulder = new Motor(hardwareMap, "shoulder");
 		claw = hardwareMap.get(Servo.class, "claw");
 		wrist = hardwareMap.get(Servo.class, "wrist");
 
@@ -129,7 +129,8 @@ public class Action {
 		telemetry.update();
 	}
 
-	public class Claw implements com.acmerobotics.roadrunner.Action {@Override
+	public class Claw implements com.acmerobotics.roadrunner.Action {
+		@Override
 		public boolean run(@NonNull TelemetryPacket packet) {
 			claw.setPosition(clawTarget);
 			packet.put("Claw Target", clawTarget);
@@ -138,7 +139,8 @@ public class Action {
 		}
 	}
 
-	public class Wrist implements com.acmerobotics.roadrunner.Action {@Override
+	public class Wrist implements com.acmerobotics.roadrunner.Action {
+		@Override
 		public boolean run(@NonNull TelemetryPacket packet) {
 			wrist.setPosition(wristTarget);
 			packet.put("Wrist Target", wristTarget);

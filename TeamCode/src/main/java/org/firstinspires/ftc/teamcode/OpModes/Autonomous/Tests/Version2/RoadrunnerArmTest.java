@@ -33,8 +33,8 @@ public class RoadrunnerArmTest extends OpMode {
 	public void loop() {
 
 		//case 1: Full Loop, No Sleep
-		setAction(1);
-		Actions.runBlocking(currentAction);
+//		setAction(1);
+//		Actions.runBlocking(currentAction);
 
 		/*
 		//case 2: Full Loop with Sleep
@@ -42,7 +42,7 @@ public class RoadrunnerArmTest extends OpMode {
 		Actions.runBlocking(currentAction);
 		 */
 
-		/*
+
 		//case 3: Loop once without Sleep
 		if(runOnce)
 		{
@@ -50,7 +50,7 @@ public class RoadrunnerArmTest extends OpMode {
 			Actions.runBlocking(currentAction);
 			runOnce = false;
 		}
-		 */
+
 
 		/*
 		//case 4: Loop once with Sleep
@@ -68,9 +68,9 @@ public class RoadrunnerArmTest extends OpMode {
 		if(id == 1)
 		{
 			currentAction =  new SequentialAction(
-					new Arm(hardwareMap, 300),
-					new Arm(hardwareMap, 500),
-					new Arm(hardwareMap, 800)
+					new Arm(hardwareMap, 800),
+//					new Arm(hardwareMap, 500),
+					new Arm(hardwareMap, 300)
 			);
 		}
 		else if(id == 2)
