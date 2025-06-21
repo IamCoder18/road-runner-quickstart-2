@@ -20,9 +20,9 @@ public class ShoulderTest extends OpMode {
 	public void start() {
 		Actions.runBlocking(
 				new SequentialAction(
-					action.shoulder(300),
+					action.shoulder(30),
 					action.hold(1),
-					action.shoulder(0)
+					action.shoulder(15)
 				)
 		);
 	}

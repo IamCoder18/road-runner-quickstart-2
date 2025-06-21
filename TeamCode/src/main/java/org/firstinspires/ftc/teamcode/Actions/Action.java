@@ -63,7 +63,7 @@ public class Action {
 	}
 
 	public Shoulder shoulder(double degrees) {
-		double shoulderTicksPerDegree = 1;
+		double shoulderTicksPerDegree = 22.755;
 		shoulderTarget = degrees * shoulderTicksPerDegree;
 		return new Shoulder();
 	}
