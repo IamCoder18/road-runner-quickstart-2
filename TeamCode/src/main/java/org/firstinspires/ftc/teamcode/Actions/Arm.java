@@ -15,12 +15,14 @@ public class Arm implements Action {
 	private final double target;
 	private final PIDController controller;
 	public final DcMotor shoulder;
-	private final static double ticksPerDegree = (double) 1;
+	private final static double ticksPerDegree = 22.755;
 	private final double f;
 
 	public Arm(HardwareMap hw, double target) {
 		this.target = target * ticksPerDegree;
-		PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.037, 0, 0, 0.001);
+
+		// re-tuned for through bore encoder
+		PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.0009, 0, 0.0001, 0.0005);
 		controller = new PIDController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d);
 		controller.setTolerance(1.8 * ticksPerDegree);
 		f = pidfCoefficients.f;

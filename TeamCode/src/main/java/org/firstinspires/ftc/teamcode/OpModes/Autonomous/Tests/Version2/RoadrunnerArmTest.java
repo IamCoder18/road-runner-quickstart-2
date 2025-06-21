@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.OpModes.Autonomous.Tests;
+package org.firstinspires.ftc.teamcode.OpModes.Autonomous.Tests.Version2;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
@@ -7,7 +7,6 @@ import com.acmerobotics.roadrunner.SleepAction;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 import org.firstinspires.ftc.teamcode.Actions.Arm;
 
@@ -69,18 +68,18 @@ public class RoadrunnerArmTest extends OpMode {
 		if(id == 1)
 		{
 			currentAction =  new SequentialAction(
-					new Arm(hardwareMap, 800),
+					new Arm(hardwareMap, 45),
 //					new Arm(hardwareMap, 500),
-					new Arm(hardwareMap, 300)
+					new Arm(hardwareMap, 15)
 			);
 		}
 		else if(id == 2)
 		{
 			currentAction =  new SequentialAction(
-					new Arm(hardwareMap, 300),
-					new Arm(hardwareMap, 500),
+					new Arm(hardwareMap, 15),
+					new Arm(hardwareMap, 30),
 					new SleepAction(3),
-					new Arm(hardwareMap, 800)
+					new Arm(hardwareMap, 45)
 			);
 		}
 	}
