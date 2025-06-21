@@ -20,7 +20,9 @@ public class Arm implements Action {
 
 	public Arm(HardwareMap hw, double target) {
 		this.target = target * ticksPerDegree;
-		PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.037, 0, 0, 0.001);
+
+		// retuned for through bore encoder
+		PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.0009, 0, 0.0001, 0.0005);
 		controller = new PIDController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d);
 		controller.setTolerance(1.8 * ticksPerDegree);
 		f = pidfCoefficients.f;
