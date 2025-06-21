@@ -22,7 +22,7 @@ public class Arm implements Action {
 		this.target = target * ticksPerDegree;
 
 		// retuned for through bore encoder
-		PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.00108, 0, 0.00001, 0.2);
+		PIDFCoefficients pidfCoefficients = new PIDFCoefficients(0.0009, 0, 0.0001, 0.0005);
 		controller = new PIDController(pidfCoefficients.p, pidfCoefficients.i, pidfCoefficients.d);
 		controller.setTolerance(1.8 * ticksPerDegree);
 		f = pidfCoefficients.f;
