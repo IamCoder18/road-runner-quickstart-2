@@ -1,11 +1,15 @@
 package org.firstinspires.ftc.teamcode.PIDF;
 
 import com.acmerobotics.dashboard.config.Config;
+import com.acmerobotics.roadrunner.ftc.Encoder;
+import com.acmerobotics.roadrunner.ftc.OverflowEncoder;
+import com.acmerobotics.roadrunner.ftc.RawEncoder;
 import com.arcrobotics.ftclib.command.Command;
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.arcrobotics.ftclib.controller.PIDFController;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 @Config
@@ -21,6 +25,7 @@ public class Arm extends SubsystemBase {
     PIDFController pidfController = new PIDFController(p, i, d, f);
     DcMotor arm;
 
+
     public Arm(HardwareMap hardwareMap){
         this.arm = hardwareMap.get(DcMotor.class, "shoulder");
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -32,6 +37,7 @@ public class Arm extends SubsystemBase {
     public void reset(){
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
     }
 
     public Command goTo(double target){

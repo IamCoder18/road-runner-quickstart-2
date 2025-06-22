@@ -10,7 +10,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 @Autonomous
 public class PIDTuning extends OpMode {
     ArmNew arm;
-    public static int target = 0;
+    public static double target = 0;
+    private final static double ticksPerDegree = 22.755;
+
     MultipleTelemetry multipleTelemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
     @Override
@@ -20,6 +22,8 @@ public class PIDTuning extends OpMode {
 
     @Override
     public void loop() {
-        arm.Goto(target);
+        double degrees = target * ticksPerDegree;
+
+        arm.Goto(degrees);
     }
 }
