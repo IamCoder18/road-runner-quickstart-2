@@ -21,9 +21,9 @@ public class Action {
 	private final Motor shoulder;
 	private final Servo claw;
 	private final Servo wrist;
-	private final PIDFCoefficients liftCoefficients = new PIDFCoefficients(0.025, 0, 0, 0.0006);
+	private final PIDFCoefficients liftCoefficients = new PIDFCoefficients(0, 0, 0, 0.000); // TODO: add the PIDFs back
 	private final PIDFController liftController = new PIDFController(liftCoefficients.p, liftCoefficients.i, liftCoefficients.d, liftCoefficients.f);
-	private final PIDFCoefficients shoulderCoefficients = new PIDFCoefficients(0.037, 0, 0, 0.001);
+	private final PIDFCoefficients shoulderCoefficients = new PIDFCoefficients(0.0009, 0, 0.0001, 0.0005);
 	private final PIDFController shoulderController = new PIDFController(shoulderCoefficients.p, shoulderCoefficients.i, shoulderCoefficients.d, shoulderCoefficients.f);
 	private double clawTarget = 0;
 	private double wristTarget = 0;
@@ -110,7 +110,7 @@ public class Action {
 		public boolean run(@NonNull TelemetryPacket packet) {
 			moveAndHold();
 
-			return holdTimer.done();
+			return !holdTimer.done();
 		}
 	}
 
