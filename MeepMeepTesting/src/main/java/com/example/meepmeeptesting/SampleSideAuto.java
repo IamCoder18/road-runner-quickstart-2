@@ -36,8 +36,15 @@ public class SampleSideAuto {
                            .strafeToLinearHeading(new Vector2d(48,-30),Math.toRadians(270))
                            .waitSeconds(1)
                            .strafeTo(new Vector2d(48,-56))
-                           .strafeToLinearHeading(new Vector2d(7,-49),Math.toRadians(90))
-                           .strafeTo(new Vector2d(7,-39)) //score
+                           .strafeToLinearHeading(new Vector2d(10,-49),Math.toRadians(90))
+                           .strafeTo(new Vector2d(10,-39)) //score 2
+                            .strafeTo(new Vector2d(5,-39))
+                           .strafeToLinearHeading(new Vector2d(48,-46),Math.toRadians(270))
+                           .strafeTo(new Vector2d(48,-56))
+
+                           .strafeToLinearHeading(new Vector2d(10,-49),Math.toRadians(90))
+                           .strafeTo(new Vector2d(10,-39)) //score  3
+                           .strafeTo(new Vector2d(5,-39))
                            .strafeToLinearHeading(new Vector2d(48,-46),Math.toRadians(270))
                            .strafeTo(new Vector2d(48,-56))
 //                           .strafeTo(new Vector2d(42,-55)) // collects from human player

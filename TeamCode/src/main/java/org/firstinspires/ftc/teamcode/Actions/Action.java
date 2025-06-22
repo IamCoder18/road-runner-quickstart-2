@@ -12,6 +12,8 @@ import com.arcrobotics.ftclib.util.Timing;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
+
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
@@ -23,7 +25,7 @@ public class Action {
 	private final Servo wrist;
 	private final PIDFCoefficients liftCoefficients = new PIDFCoefficients(0, 0, 0, 0.000); // TODO: add the PIDFs back
 	private final PIDFController liftController = new PIDFController(liftCoefficients.p, liftCoefficients.i, liftCoefficients.d, liftCoefficients.f);
-	private final PIDFCoefficients shoulderCoefficients = new PIDFCoefficients(0.0009, 0, 0.0001, 0.0005);
+	private final PIDFCoefficients shoulderCoefficients = new PIDFCoefficients(0.0009, 0.00001, 0.00019, 0.00003); //
 	private final PIDFController shoulderController = new PIDFController(shoulderCoefficients.p, shoulderCoefficients.i, shoulderCoefficients.d, shoulderCoefficients.f);
 	private double clawTarget = 0;
 	private double wristTarget = 0;
@@ -31,6 +33,7 @@ public class Action {
 	private double shoulderTarget = 0;
 	private final MultipleTelemetry telemetry;
 	private Timing.Timer holdTimer;
+	private ElapsedTime timerHold;
 
 	public Action(HardwareMap hardwareMap, Telemetry originalTelemetry) {
 		liftMotorLeft = new Motor(hardwareMap, "liftMotorLeft", Motor.GoBILDA.RPM_117);
@@ -84,6 +87,7 @@ public class Action {
 	public Hold hold(double waitTime) {
 		holdTimer = new Timing.Timer((long) waitTime);
 		holdTimer.start();
+		telemetry.addLine("Hold has Started");
 		return new Hold();
 	}
 
@@ -108,9 +112,10 @@ public class Action {
 	public class Hold implements com.acmerobotics.roadrunner.Action {
 		@Override
 		public boolean run(@NonNull TelemetryPacket packet) {
+			telemetry.addData("Time left of Hold", holdTimer.elapsedTime());
 			moveAndHold();
 
-			return !holdTimer.done();
+			return !holdTimer.done(); // TODO: why is it not working
 		}
 	}
 
