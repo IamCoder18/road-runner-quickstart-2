@@ -16,7 +16,8 @@ import com.qualcomm.robotcore.hardware.Servo;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Action {
-	private final MotorGroup liftMotor;
+	private final Motor liftMotorLeft;
+	private final Motor liftMotorRight;
 	private final Motor shoulder;
 	private final Servo claw;
 	private final Servo wrist;
@@ -32,9 +33,8 @@ public class Action {
 	private Timing.Timer holdTimer;
 
 	public Action(HardwareMap hardwareMap, Telemetry originalTelemetry) {
-		Motor liftMotorLeft = new Motor(hardwareMap, "liftMotorLeft", Motor.GoBILDA.RPM_117);
-		Motor liftMotorRight = new Motor(hardwareMap, "liftMotorRight", Motor.GoBILDA.RPM_117);
-		liftMotor = new MotorGroup(liftMotorLeft, liftMotorRight);
+		liftMotorLeft = new Motor(hardwareMap, "liftMotorLeft", Motor.GoBILDA.RPM_117);
+		liftMotorRight = new Motor(hardwareMap, "liftMotorRight", Motor.GoBILDA.RPM_117);
 		shoulder = new Motor(hardwareMap, "shoulder");
 		claw = hardwareMap.get(Servo.class, "claw");
 		wrist = hardwareMap.get(Servo.class, "wrist");
@@ -44,13 +44,16 @@ public class Action {
 		double shoulderTolerance = 1.8;
 		shoulderController.setTolerance(shoulderTolerance);
 
-		liftMotor.setInverted(false);
+		liftMotorLeft.setInverted(false);
+		liftMotorRight.setInverted(false);
 		shoulder.setInverted(true);
 		claw.scaleRange(0, 1);
 		wrist.scaleRange(0, 1);
-		liftMotor.resetEncoder();
+		liftMotorLeft.resetEncoder();
+		liftMotorRight.resetEncoder();
 		shoulder.resetEncoder();
-		liftMotor.setRunMode(Motor.RunMode.RawPower);
+		liftMotorLeft.setRunMode(Motor.RunMode.RawPower);
+		liftMotorRight.setRunMode(Motor.RunMode.RawPower);
 		shoulder.setRunMode(Motor.RunMode.RawPower);
 
 		telemetry = new MultipleTelemetry(originalTelemetry, FtcDashboard.getInstance().getTelemetry());
@@ -112,9 +115,10 @@ public class Action {
 	}
 
 	private void moveAndHold() {
-		double currentLiftPosition = liftMotor.getCurrentPosition();
+		double currentLiftPosition = (liftMotorLeft.getCurrentPosition() + liftMotorRight.getCurrentPosition()) / 2;
 		double liftPidOutput = liftController.calculate(currentLiftPosition, liftTarget);
-		liftMotor.set(liftPidOutput);
+		liftMotorLeft.set(liftPidOutput);
+		liftMotorRight.set(liftPidOutput);
 
 		double currentShoulderPosition = shoulder.getCurrentPosition();
 		double shoulderPidOutput = shoulderController.calculate(currentShoulderPosition, shoulderTarget);

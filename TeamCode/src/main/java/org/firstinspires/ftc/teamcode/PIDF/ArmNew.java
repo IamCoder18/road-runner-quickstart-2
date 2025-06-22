@@ -26,7 +26,7 @@ public class ArmNew {
     // These are the vaules that worked on jun 14
     public static double p = 0.037, i = 0, d = 0.001, f = 0.001;
     public static  int target;
-    private static double ticks_per_degree = 700/180;
+    private static double ticks_per_degree = 25.755;
 
     public ArmNew(HardwareMap hw, MultipleTelemetry telemetry){
         shoulder = hw.get(DcMotor.class,"shoulder");
@@ -36,10 +36,10 @@ public class ArmNew {
     }
 
     public void Goto(int pos){
-        target = pos;
+        target = (int) (pos * ticks_per_degree);
         controller.setPID(p,i,d);
         int armpos = shoulder.getCurrentPosition();
-        double pid = controller.calculate(armpos,target);
+        double pid = controller.calculate(armpos, target);
         double ff = Math.cos(target/ticks_per_degree)*f;
 
         double power = pid + ff;
