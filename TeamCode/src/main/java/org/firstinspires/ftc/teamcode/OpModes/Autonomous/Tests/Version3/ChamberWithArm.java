@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.OpModes.Autonomous.Tests.Version3;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
+import com.acmerobotics.roadrunner.Trajectory;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -26,16 +27,22 @@ public class ChamberWithArm extends OpMode {
 
     @Override
     public void start() {
-        Actions.runBlocking(
+        Actions.runBlocking(GetCaseOne());
+    }
 
-
-                new SequentialAction(
-                        action.shoulder(30),
-                        action.hold(1),
-                        action.shoulder(15)
-
-
-                )
+    SequentialAction GetCaseOne(){
+        return new SequentialAction(
+                action.claw(0),
+                action.hold(0.5),
+                action.shoulder(90),
+                action.wrist(0),
+                action.hold(0.5),
+                drive.actionBuilder(beginPose)
+                        .strafeTo(new Vector2d(7,-39))
+                        .waitSeconds(0.2) //score on obervation zone
+                        .strafeTo(new Vector2d(0,-39))
+                        .build(),
+                action.claw(1)
         );
     }
 
@@ -43,4 +50,8 @@ public class ChamberWithArm extends OpMode {
     public void loop() {
 
     }
+
 }
+
+
+

@@ -139,7 +139,7 @@ public class Action {
 			claw.setPosition(clawTarget);
 			packet.put("Claw Target", clawTarget);
 
-			return true;
+			return false;
 		}
 	}
 
@@ -149,7 +149,7 @@ public class Action {
 			wrist.setPosition(wristTarget);
 			packet.put("Wrist Target", wristTarget);
 
-			return true;
+			return false;
 		}
 	}
 }
