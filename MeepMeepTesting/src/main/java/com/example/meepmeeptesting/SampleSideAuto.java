@@ -16,11 +16,12 @@ public class SampleSideAuto {
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(11.5, -61.5, Math.toRadians(90)))
-                .strafeTo(new Vector2d(7,-37))
-                .strafeTo(new Vector2d(11.5,-40))
+                // remember, at 90 degrees, the arm protrudes 7 inches outside the robot's body
+                            .strafeTo(new Vector2d(7,-39))
+                            .waitSeconds(0.2) //score on obervation zone
+                            .strafeTo(new Vector2d(0,-39))
+                            //.strafeTo(new Vector2d(11.5,-50))
 
-//                .splineTo(new Vector2d(40,0),Math.toRadians(90))
-//                        .lineToY(-48)
                            .splineToConstantHeading(new Vector2d(36,-36),Math.toRadians(90))
                            .splineToConstantHeading(new Vector2d(36,0),Math.toRadians(90))
                            .strafeTo(new Vector2d(42,0))
@@ -32,8 +33,13 @@ public class SampleSideAuto {
                            .strafeTo(new Vector2d(61,0))
                            .strafeTo(new Vector2d(61,-50)) // third sample into obervation zone
 
-                           .strafeToLinearHeading(new Vector2d(42,-30),Math.toRadians(270))
-                           .waitSeconds(2)
+                           .strafeToLinearHeading(new Vector2d(48,-30),Math.toRadians(270))
+                           .waitSeconds(1)
+                           .strafeTo(new Vector2d(48,-56))
+                           .strafeToLinearHeading(new Vector2d(7,-49),Math.toRadians(90))
+                           .strafeTo(new Vector2d(7,-39)) //score
+                           .strafeToLinearHeading(new Vector2d(48,-46),Math.toRadians(270))
+                           .strafeTo(new Vector2d(48,-56))
 //                           .strafeTo(new Vector2d(42,-55)) // collects from human player
 //                        .splineTo(new Vector2d(48,-48),Math.toRadians(90))
                 .build());

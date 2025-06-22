@@ -23,9 +23,9 @@ public class ArmNew {
     MultipleTelemetry Telemetry;
     private PIDController controller;
 
-    // These are the vaules that worked on jun 14
-    public static double p = 0.037, i = 0, d = 0.001, f = 0.001;
-    public static  int target;
+    // These are the vaules that worked on jun 21
+    public static double p = 0.0009, i = 0, f = 0.0001, d = 0.0005;
+    public static double target;
     private static double ticks_per_degree = 25.755;
 
     public ArmNew(HardwareMap hw, MultipleTelemetry telemetry){
@@ -35,7 +35,7 @@ public class ArmNew {
         controller = new PIDController(p,i,d);
     }
 
-    public void Goto(int pos){
+    public void Goto(double pos){
         target = (int) (pos * ticks_per_degree);
         controller.setPID(p,i,d);
         int armpos = shoulder.getCurrentPosition();
