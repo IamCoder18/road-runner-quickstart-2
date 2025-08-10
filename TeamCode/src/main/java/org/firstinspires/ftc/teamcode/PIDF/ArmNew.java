@@ -19,19 +19,23 @@ public class ArmNew {
     //  video --> https://www.youtube.com/watch?v=E6H6Nqe6qJo
 
     DcMotor shoulder;
+    DcMotor test;
 
     MultipleTelemetry Telemetry;
     private PIDController controller;
 
-    // These are the vaules that worked on jun 21
-    public static double p = 0.0009, i = 0, f = 0.0001, d = 0.0005;
+    // These are the vaules that worked on jul 10
+    public static double p = 0, i = 0, f = 0, d = 0;
     public static double target;
-    private static double ticks_per_degree = 25.755;
+   // private static double ticks_per_degree = 1.06805556;
+
+    private static double ticks_per_degree = 22.755;
 
     public ArmNew(HardwareMap hw, MultipleTelemetry telemetry){
         shoulder = hw.get(DcMotor.class,"shoulder");
+        test = hw.get(DcMotor.class,"test");
         this.Telemetry = telemetry;
-        shoulder.setDirection(DcMotorSimple.Direction.REVERSE);
+        test.setDirection(DcMotorSimple.Direction.REVERSE);
         controller = new PIDController(p,i,d);
     }
 
