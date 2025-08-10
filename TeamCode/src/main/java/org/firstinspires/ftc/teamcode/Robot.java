@@ -7,14 +7,14 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 //import org.firstinspires.ftc.teamcode.Subsystems.Compass;
 
 //import org.firstinspires.ftc.teamcode.Subsystems.GoBildaPinpointDriver;
-//import org.firstinspires.ftc.teamcode.Subsystems.Intake;
-//import org.firstinspires.ftc.teamcode.Subsystems.Lift;
+import org.firstinspires.ftc.teamcode.Intake;
+import org.firstinspires.ftc.teamcode.Lift;
 //import org.firstinspires.ftc.teamcode.Subsystems.Odometry;
 
 public class Robot {
     // Public Subsystems
-//    public Intake intake;
-//    public Lift lift;
+  public Intake intake;
+    public Lift lift;
     public Drive drive;
 //    public Compass compass;
 //    public Odometry odometry;
@@ -27,17 +27,17 @@ public class Robot {
         DcMotor liftMotorLeft = hardwareMap.get(DcMotor.class, "liftMotorLeft");
         DcMotor liftMotorRight = hardwareMap.get(DcMotor.class, "liftMotorRight");
         DcMotor shoulder = hardwareMap.get(DcMotor.class, "shoulder");
-        DcMotor frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        DcMotor frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        DcMotor rearLeft = hardwareMap.get(DcMotor.class, "rearLeft");
-        DcMotor rearRight = hardwareMap.get(DcMotor.class, "rearRight");
+        DcMotor frontLeft = hardwareMap.get(DcMotor.class, "leftFront");
+        DcMotor frontRight = hardwareMap.get(DcMotor.class, "rightFront");
+        DcMotor rearLeft = hardwareMap.get(DcMotor.class, "leftRear");
+        DcMotor rearRight = hardwareMap.get(DcMotor.class, "rightRear");
 
 //        GoBildaPinpointDriver odometryComputer = hardwareMap.get(GoBildaPinpointDriver.class, "odo");
 //
 //        // Initialize Public Subsystems
 //        compass = new Compass(odometryComputer);
 //        intake = new Intake(claw, wrist);
-//        lift = new Lift(liftMotorLeft, liftMotorRight, shoulder);
+          lift = new Lift(liftMotorLeft, liftMotorRight, shoulder);
 //        drive = new Drive(frontLeft, frontRight, rearLeft, rearRight, compass);
 //        odometry = new Odometry(odometryComputer, compass);
 

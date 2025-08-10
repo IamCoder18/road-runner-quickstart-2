@@ -16,8 +16,8 @@ public class SampleSideAuto {
                 .build();
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(11.5, -61.5, Math.toRadians(90)))
-                // remember, at 90 degrees, the arm protrudes 7 inches outside the robot's body
-                            .strafeTo(new Vector2d(7,-39))
+                // remember, at 90 degrees, the arm protrudes 8.5 inches outside the robot's body
+                            .strafeTo(new Vector2d(11.5,-39))
                             .waitSeconds(0.2) //score on obervation zone
                             .strafeTo(new Vector2d(0,-39))
                             //.strafeTo(new Vector2d(11.5,-50))

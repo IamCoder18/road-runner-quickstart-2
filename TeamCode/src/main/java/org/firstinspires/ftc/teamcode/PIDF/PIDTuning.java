@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 public class PIDTuning extends OpMode {
     ArmNew arm;
     public static double target = 0;
-    private final static double ticksPerDegree = 22.755;
+    private final static double ticksPerDegree = 1; // TODO: find out why 22.755 no longer operates
 
     MultipleTelemetry multipleTelemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
