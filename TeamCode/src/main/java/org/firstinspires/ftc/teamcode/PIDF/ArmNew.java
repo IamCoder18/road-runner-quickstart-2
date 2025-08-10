@@ -5,6 +5,7 @@ import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.controller.PIDController;
+import com.arcrobotics.ftclib.controller.PIDFController;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -21,28 +22,24 @@ public class ArmNew {
     DcMotor shoulder;
 
     MultipleTelemetry Telemetry;
-    private PIDController controller;
+    private NewPIDFController controller;
 
     // These are the vaules that worked on jun 21
     public static double p = 0.0009, i = 0, f = 0.0001, d = 0.0005;
     public static double target;
-    private static double ticks_per_degree = 25.755;
 
     public ArmNew(HardwareMap hw, MultipleTelemetry telemetry){
         shoulder = hw.get(DcMotor.class,"shoulder");
         this.Telemetry = telemetry;
         shoulder.setDirection(DcMotorSimple.Direction.REVERSE);
-        controller = new PIDController(p,i,d);
+        controller = new NewPIDFController(p, i, d, f);
     }
 
     public void Goto(double pos){
-        target = (int) (pos * ticks_per_degree);
-        controller.setPID(p,i,d);
+        target = (int) (pos);
+        controller.setPID(p, i, d, f);
         int armpos = shoulder.getCurrentPosition();
-        double pid = controller.calculate(armpos, target);
-        double ff = Math.cos(target/ticks_per_degree)*f;
-
-        double power = pid + ff;
+        double power = controller.getOutput(armpos, target);
 
         shoulder.setPower(power);
 

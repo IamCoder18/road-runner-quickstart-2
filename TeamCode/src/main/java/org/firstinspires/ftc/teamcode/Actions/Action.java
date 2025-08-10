@@ -25,7 +25,7 @@ public class Action {
 	private final Servo wrist;
 	private final PIDFCoefficients liftCoefficients = new PIDFCoefficients(0, 0, 0, 0.000); // TODO: add the PIDFs back
 	private final PIDFController liftController = new PIDFController(liftCoefficients.p, liftCoefficients.i, liftCoefficients.d, liftCoefficients.f);
-	private final PIDFCoefficients shoulderCoefficients = new PIDFCoefficients(0.0009, 0.00001, 0.00019, 0.00003); //
+	private final PIDFCoefficients shoulderCoefficients = new PIDFCoefficients(0.0009, 0.00001, 0.00019, 0.00003); // 22 June PIDF re-tuned
 	private final PIDFController shoulderController = new PIDFController(shoulderCoefficients.p, shoulderCoefficients.i, shoulderCoefficients.d, shoulderCoefficients.f);
 	private double clawTarget = 0;
 	private double wristTarget = 0;

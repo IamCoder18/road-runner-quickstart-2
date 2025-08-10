@@ -17,7 +17,7 @@ public class PIDTuning extends OpMode {
 
     @Override
     public void init() {
-        arm = new ArmNew(hardwareMap,multipleTelemetry);
+        arm = new ArmNew(hardwareMap, multipleTelemetry);
     }
 
     @Override
