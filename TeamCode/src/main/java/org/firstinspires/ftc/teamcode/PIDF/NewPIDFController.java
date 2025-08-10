@@ -245,7 +245,7 @@ public class NewPIDFController {
 
 			// Do the simple parts of the calculations
 			double error=setpoint-actual;
-
+	
 			Foutput=F*setpoint;
 
 			Poutput=P*error;
