@@ -7,12 +7,15 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 //import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 //import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 //import org.firstinspires.ftc.teamcode.Utilities.Consta
+import org.firstinspires.ftc.teamcode.PIDF.LiftNew;
 import org.firstinspires.ftc.teamcode.Robot;
 
 
 @Disabled
 public class TeleOp extends OpMode {
     private Robot robot;
+
+    private LiftNew liftNew;
 
     @Override
     public void init() {
@@ -60,11 +63,16 @@ public class TeleOp extends OpMode {
             robot.intake.clawClose();
         }
 
+        //lift
+        if (gamepad2.left_trigger > 0){
+            liftNew.Goto(500);
+        }
+
         //robot.odometry.update();
 
         // Telemetry
         //telemetry.addLine(robot.lift.getTelemetry());
-        robot.lift.getJointLiftPosition();
+        //robot.lift.getJointLiftPosition();
         //telemetry.addLine(robot.intake.getTelemetry());
         //Pose2D position = robot.odometry.getPosition();
         //telemetry.addLine(String.format(Locale.getDefault(), "X: %f, Y: %f, Heading: %f", position.getX(DistanceUnit.INCH), position.getY(DistanceUnit.INCH), position.getHeading(AngleUnit.DEGREES)));

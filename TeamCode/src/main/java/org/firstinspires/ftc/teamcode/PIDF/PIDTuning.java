@@ -9,21 +9,22 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 @Config
 @Autonomous
 public class PIDTuning extends OpMode {
-    ArmNew arm;
+    LiftNew lift;
     public static double target = 0;
-    private final static double ticksPerDegree = 1; // TODO: find out why 22.755 no longer operates
-
+    private final static double ticksPerDegree = 1; // TODO: find the tick/inch
     MultipleTelemetry multipleTelemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
     @Override
     public void init() {
-        arm = new ArmNew(hardwareMap, multipleTelemetry);
+        lift = new LiftNew(hardwareMap, multipleTelemetry);
+
+
     }
 
     @Override
     public void loop() {
         double degrees = target * ticksPerDegree;
 
-        arm.Goto(degrees);
+        lift.Goto((int)degrees);
     }
 }

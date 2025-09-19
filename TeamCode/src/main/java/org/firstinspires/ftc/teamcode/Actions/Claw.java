@@ -4,17 +4,27 @@ import androidx.annotation.NonNull;
 
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
+import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.ServoController;
+import com.qualcomm.robotcore.hardware.VoltageSensor;
+
+import org.firstinspires.ftc.teamcode.NewServo;
+
+import java.sql.Time;
 
 public class Claw implements Action {
-	private final Servo claw;
+	private final NewServo claw;
 	private final double target;
 
-	public Claw(HardwareMap hw, double target) {
-		this.claw = hw.get(Servo.class, "claw");
-		this.claw.scaleRange(0, 1);
+	private ServoController controller;
+	private java.sql.Time time = new java.sql.Time(0);
 
+	public Claw(HardwareMap hw, double target) {
+		this.claw = new NewServo(hw,"claw");
+	    this.claw.setRange(0, 1);
+//		this.time = timer;
 		this.target = target;
 	}
 
@@ -25,9 +35,11 @@ public class Claw implements Action {
 	 */
 	@Override
 	public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-		this.claw.setPosition(target);
+
+		this.claw.moveToPosition(target);
 		telemetryPacket.put("Claw Target", target);
 
-		return true;
+
+		return claw.getPos() == target;
 	}
 }

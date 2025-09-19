@@ -17,11 +17,11 @@ public class LiftNew {
     DcMotor liftLeft;
     DcMotor liftRight;
 
-    MultipleTelemetry Telemetry;
-    private PIDController controller;
+    public MultipleTelemetry Telemetry;
+    private NewPIDFController controller;
 
-    // These are the vaules that worked on jun 14 fort the lift
-    public static double p = 0.025, i = 0, d = 0, f = 0.0006;
+    // These are the vaules that worked on aug 9
+    public static double p = 0.015, i = 0, d = 0, f = 0;
     public static  int target;
     private static double ticks_per_degree = 700/180;
 
@@ -30,14 +30,14 @@ public class LiftNew {
         liftRight = hw.get(DcMotor.class,"liftMotorRight");
         this.Telemetry = telemetry;
         liftRight.setDirection(DcMotorSimple.Direction.REVERSE);
-        controller = new PIDController(p,i,d);
+        controller = new NewPIDFController(p,i,d,f);
     }
 
-    public void Goto(int pos){
+    public void Goto( int pos){
         target = pos;
         controller.setPID(p,i,d);
         int liftpos = (liftLeft.getCurrentPosition() + liftRight.getCurrentPosition()) / 2;
-        double pid = controller.calculate(liftpos,target);
+        double pid = controller.getOutput(liftpos,target);
         double ff = Math.cos(target/ticks_per_degree)*f;
 
         double power = pid + ff;

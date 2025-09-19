@@ -24,7 +24,7 @@ public class Bucketside {
                         .strafeToLinearHeading(new Vector2d(-58,-46), Math.toRadians(90))
                         .waitSeconds(1)
                         .strafeToLinearHeading(new Vector2d(-51,-51),Math.toRadians(225))
-                        .strafeToLinearHeading(new Vector2d(-58,-8),Math.toRadians(90))
+                        .strafeToLinearHeading(new Vector2d(-52,-25),Math.toRadians(180))
                         .build());
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
