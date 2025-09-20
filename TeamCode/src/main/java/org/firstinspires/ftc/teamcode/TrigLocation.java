@@ -1,5 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+import static org.firstinspires.ftc.teamcode.MecanumDrive.PARAMS;
+
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -14,15 +17,17 @@ public class TrigLocation {
     Vector2d redGoal = new Vector2d(59,59);
     Vector2d bluGoal = new Vector2d(59,-59);
 
-    Localizer localizer;
-
     public Pose2d currentPos = drive.localizer.getPose();
+
+    public Localizer localizer = new TwoDeadWheelLocalizer(hardwareMap,drive.lazyImu.get(), PARAMS.inPerTick, currentPos);
 
     public double redHypothenus = 0;
     public double redAjecentAngle = 0;
 
     public double bluHypothenus = 0;
     public double bluAjecentAngle = 0;
+
+
 
 
 

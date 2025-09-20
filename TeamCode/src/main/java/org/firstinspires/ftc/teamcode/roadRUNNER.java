@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.teamcode.MecanumDrive.PARAMS;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
@@ -16,11 +17,11 @@ public class roadRUNNER extends OpMode {
 
     double Dx, Dy,Dh;
 
-    double X = gamepad1.left_stick_y;
-    double Y = gamepad1.left_stick_x;
-    double H = gamepad1.right_stick_x;
-    double aimTrigger = gamepad1.right_trigger;
-    double parkTrigger = gamepad1.right_trigger;
+    double X;
+    double Y;
+    double H;
+    double aimTrigger;
+    double parkTrigger;
 
     public String allianceGoal = "RED GOAL";
 
@@ -28,33 +29,42 @@ public class roadRUNNER extends OpMode {
 
     @Override
     public void init() {
+        drive = new MecanumDrive(hardwareMap, beginPose);
+        localizer = new TwoDeadWheelLocalizer(hardwareMap,drive.lazyImu.get(), PARAMS.inPerTick, beginPose);
         beginPose = new Pose2d(0, 0, Math.toRadians(180));
         trig = new TrigLocation(drive,localizer,hardwareMap);
         Dx = beginPose.position.x;
         Dy = beginPose.position.y;
         Dh = Double.valueOf(String.valueOf(beginPose.heading));
-        drive = new MecanumDrive(hardwareMap, beginPose);
+
+
+         X = gamepad1.left_stick_y;
+         Y = gamepad1.left_stick_x;
+         H = gamepad1.right_stick_x;
+         aimTrigger = gamepad1.right_trigger;
+         parkTrigger = gamepad1.right_trigger;
 
     }
     @Override
     public void loop() {
-        Pose2d pose = drive.localizer.getPose();
         telemetry.addData("Status", "Running");
+        telemetry.addData("X,Y,H", localizer.getPose());
+        telemetry.addLine(allianceGoal);
         telemetry.update();
-        drive.updatePoseEstimate();
+        localizer.update();
 
 
-        if (parkTrigger == 0) {
+        if (parkTrigger <= 0.5) {
             if (X != 0) {
                 Dx += X * 12.2;
             } else {
-                Dx = drive.localizer.getPose().position.x;
+                Dx = localizer.getPose().position.x;
             }
 
             if (Y != 0) {
                 Dy += Y * 12.2;
             } else {
-                Dy = drive.localizer.getPose().position.y;
+                Dy = localizer.getPose().position.y;
             }
 
             if (aimTrigger != 0) {
@@ -62,7 +72,7 @@ public class roadRUNNER extends OpMode {
                     Dh += trig.normalizeAngle(X * Math.toRadians(30));
 
                 } else {
-                    Dh = Double.valueOf(String.valueOf(drive.localizer.getPose().heading));
+                    Dh = Double.valueOf(String.valueOf(localizer.getPose().heading));
                 }
             } else {
                 if (allianceGoal == "RED GOAL") {
