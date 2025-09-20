@@ -23,6 +23,8 @@ public class roadRUNNER extends OpMode {
     double H = gamepad1.right_stick_x;
     double aimTrigger = gamepad1.right_trigger;
 
+    double parkTrigger = gamepad1.right_trigger;
+
  // red park is 37, -33
 
     @Override
@@ -42,27 +44,34 @@ public class roadRUNNER extends OpMode {
         telemetry.update();
         drive.updatePoseEstimate();
 
-        if (X != 0){
-            Dx += X * 12.2;
-        }else{
-            Dx = drive.localizer.getPose().position.x;
-        }
 
-        if (Y != 0){
-            Dy += Y * 12.2;
-        }else{
-            Dy = drive.localizer.getPose().position.y;
-        }
+        if (parkTrigger == 0) {
+            if (X != 0) {
+                Dx += X * 12.2;
+            } else {
+                Dx = drive.localizer.getPose().position.x;
+            }
 
-        if (aimTrigger != 0){
-            if (H != 0) {
-                Dh += trig.normalizeAngle(X + Math.toRadians(30));
+            if (Y != 0) {
+                Dy += Y * 12.2;
+            } else {
+                Dy = drive.localizer.getPose().position.y;
+            }
 
-            }else{
-                Dh = Double.valueOf(String.valueOf(drive.localizer.getPose().heading));
+            if (aimTrigger != 0) {
+                if (H != 0) {
+                    Dh += trig.normalizeAngle(X * Math.toRadians(30));
+
+                } else {
+                    Dh = Double.valueOf(String.valueOf(drive.localizer.getPose().heading));
+                }
+            } else {
+                Dh = trig.TurnToRed();
             }
         }else{
-            Dh = trig.TurnToRed();
+            Dy = 37;
+            Dx = -33;
+            Dh = Math.toRadians(90);
         }
 
 
