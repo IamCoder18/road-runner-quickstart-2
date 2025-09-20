@@ -1,12 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
-import org.firstinspires.ftc.teamcode.messages.PoseMessage;
-
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-import org.firstinspires.ftc.teamcode.MecanumDrive;
 public class TrigLocation {
 
 
@@ -27,6 +24,8 @@ public class TrigLocation {
     public double bluHypothenus = 0;
     public double bluAjecentAngle = 0;
 
+
+
     public TrigLocation(MecanumDrive mecanumDrive ,Localizer localizer, HardwareMap hardwareMap){
         this.drive = mecanumDrive;
         this.localizer = localizer;
@@ -34,6 +33,8 @@ public class TrigLocation {
 
 
     }
+
+
 
     public double TurnToRed() {
         double diffX = redGoal.x - currentPos.position.x;
@@ -54,7 +55,7 @@ public class TrigLocation {
         return angle;
     }
 
-    public Pose2d TurnToBlue() {
+    public double TurnToBlue() {
         double diffX = bluGoal.x - currentPos.position.x;
         double diffY = bluGoal.y - currentPos.position.y;
 
@@ -63,7 +64,7 @@ public class TrigLocation {
 
         bluAjecentAngle = diffY/diffX;
 
-        return new Pose2d(currentPos.position.x, currentPos.position.y, bluAjecentAngle);
+        return normalizeAngle(bluAjecentAngle);
     }
 }
 

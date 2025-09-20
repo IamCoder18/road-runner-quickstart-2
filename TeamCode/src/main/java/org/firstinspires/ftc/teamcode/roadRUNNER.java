@@ -1,10 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.acmerobotics.roadrunner.Pose2d;
-import com.acmerobotics.roadrunner.Rotation2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -22,8 +20,9 @@ public class roadRUNNER extends OpMode {
     double Y = gamepad1.left_stick_x;
     double H = gamepad1.right_stick_x;
     double aimTrigger = gamepad1.right_trigger;
-
     double parkTrigger = gamepad1.right_trigger;
+
+    public String allianceGoal = "RED GOAL";
 
  // red park is 37, -33
 
@@ -66,7 +65,11 @@ public class roadRUNNER extends OpMode {
                     Dh = Double.valueOf(String.valueOf(drive.localizer.getPose().heading));
                 }
             } else {
-                Dh = trig.TurnToRed();
+                if (allianceGoal == "RED GOAL") {
+                    Dh = trig.TurnToRed();
+                }else if (allianceGoal == "BLUEGOAL"){
+                    Dh = trig.TurnToBlue();
+                }
             }
         }else{
             Dy = 37;
